@@ -51,7 +51,7 @@ void SList::pop_front()
 
 SListIterator begin()
 {
-    return
+    return;
 }
 
 SListIterator end()
