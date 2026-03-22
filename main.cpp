@@ -24,7 +24,15 @@ int main()
 {
     SList slist;
     slist.push_front(5);
+    slist.push_front(1);
+    slist.push_front(2);
     slist.push_back(8);
+    slist.push_back(12);
+    slist.push_back(13);
+    slist.pop_front();
+    slist.pop_front();
+    slist.pop_front();
+//    slist.PrintList();
     for (SList::iterator itr = slist.begin() ; itr != slize.end() ; ++itr)
     {
         std::cout << *itr << std::cout;

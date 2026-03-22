@@ -1,59 +1,60 @@
 #ifndef __SLIST_H__
 #define __SLIST_H__
-#include <vector>
+#include <iostream>
 
 
 
-
+/* Data struct */
 struct Node
 {
     int value;
     Node* next;
 };
 
-class SList
-{
-    public:
-
-        bool isEmpty() { return m_head == nullptr; }
-        explicit SList(Node* head = nullptr, Node *tail = nullptr) : m_head(head), m_tail(tail) {}
-        SList(const SList &);
-        void push_back(int x);
-        void push_front(int x);
-        void pop_front();
-        SListIterator begin();
-        SListIterator end();
-        ~SList();
-
-    private:
-        Node* m_head;
-
-        // For implementation of push_front in O(1).
-
-        Node* m_tail;
-
-};
-
+/* Iterator class */
 
 class SListIterator
 {
     public:
 
-        explicit SListIterator();
-
+        explicit SListIterator(Node* node_ptr) : m_node_ptr(node_ptr){}
 
         ~SListIterator() = default;
 
-        SListIterator operator++();
+        SListIterator& operator++();
         bool operator==(const SListIterator&);
         bool operator!=(const SListIterator&);
-        SListIterator operator=(const SListIterator&);
-
+        void operator=(const SListIterator&);
+        Node* operator*();
 
     private:
-        Node* list_ptr;
+        Node* m_node_ptr;
 
 };
+
+
+/* List class */
+class SList
+{
+    public:
+
+        bool isEmpty() { return m_head == nullptr; }
+        explicit SList(Node* head = nullptr) : m_head(head){}
+        SList(const SList &) = delete;
+        void push_back(int x);
+        void push_front(int x);
+        void pop_front();
+        SListIterator begin();
+        SListIterator end();
+        void PrintList();
+        ~SList();
+
+    private:
+        Node* m_head;
+                    
+
+};
+
 
 
 /* class SList:
