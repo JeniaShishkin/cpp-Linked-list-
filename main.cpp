@@ -29,13 +29,13 @@ int main()
     slist.push_back(8);
     slist.push_back(12);
     slist.push_back(13);
-    slist.pop_front();
-    slist.pop_front();
-    slist.pop_front();
-//    slist.PrintList();
-    for (SList::iterator itr = slist.begin() ; itr != slize.end() ; ++itr)
+//    slist.pop_front();
+//    slist.pop_front();
+//    slist.pop_front();
+    slist.PrintList();
+/*     for (SList::SListIterator itr = slist.begin() ; itr != slist.end() ; ++itr)
     {
-        std::cout << *itr << std::cout;
-    }
+        std::cout << *itr << std::endl;
+    } */
     return 0;
 }

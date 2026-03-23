@@ -4,54 +4,51 @@
 
 
 
-/* Data struct */
+/* List node struct */
 struct Node
 {
     int value;
     Node* next;
 };
 
-/* Iterator class */
-
-class SListIterator
-{
-    public:
-
-        explicit SListIterator(Node* node_ptr) : m_node_ptr(node_ptr){}
-
-        ~SListIterator() = default;
-
-        SListIterator& operator++();
-        bool operator==(const SListIterator&);
-        bool operator!=(const SListIterator&);
-        void operator=(const SListIterator&);
-        Node* operator*();
-
-    private:
-        Node* m_node_ptr;
-
-};
-
-
 /* List class */
 class SList
 {
+public:
+    class SListIterator
+    {
     public:
 
-        bool isEmpty() { return m_head == nullptr; }
-        explicit SList(Node* head = nullptr) : m_head(head){}
-        SList(const SList &) = delete;
-        void push_back(int x);
-        void push_front(int x);
-        void pop_front();
-        SListIterator begin();
-        SListIterator end();
-        void PrintList();
-        ~SList();
+        explicit SListIterator(Node* node_ptr) : current(node_ptr) { }
+        SListIterator(const SListIterator& other) = default;
+        ~SListIterator() = default;
+        SListIterator& operator++() { current = current->next; return *this; }
+        bool operator==(const SListIterator& other) { return current == other.current; }
+        bool operator!=(const SListIterator& other) { return !(current == other.current); }
+        SListIterator& operator=(const SListIterator& other) { current = other.current; return *this; } 
+        int& operator*() { return current->value; }
 
     private:
-        Node* m_head;
-                    
+        Node* current;
+    };
+
+    explicit SList(Node* head = nullptr, Node* tail = nullptr) : m_head(head), m_tail(tail){}
+    SList(const SList & other) = default;
+    ~SList();
+    void push_back(const int &x);
+    void push_front(const int &x);
+    void pop_front();
+    bool isEmpty() { return m_head == nullptr; }
+    
+    // Iterator methods.
+    SListIterator begin() const { return SListIterator{m_head}; }
+    SListIterator end() const { return SListIterator{nullptr}; }
+
+    void PrintList();
+private:
+
+    Node* m_head;
+    Node* m_tail;
 
 };
 
