@@ -33,9 +33,9 @@ int main()
 //    slist.pop_front();
 //    slist.pop_front();
     slist.PrintList();
-/*     for (SList::SListIterator itr = slist.begin() ; itr != slist.end() ; ++itr)
-    {
-        std::cout << *itr << std::endl;
-    } */
+    SList slist2 = slist;
+    *(slist2.begin()) = 42;
+    slist2.PrintList();
+
     return 0;
 }

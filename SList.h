@@ -14,12 +14,15 @@ struct Node
 /* List class */
 class SList
 {
+
 public:
+
     class SListIterator
     {
+
     public:
 
-        explicit SListIterator(Node* node_ptr) : current(node_ptr) { }
+        constexpr explicit SListIterator(Node* node_ptr) : current(node_ptr) { }
         SListIterator(const SListIterator& other) = default;
         ~SListIterator() = default;
         SListIterator& operator++() { current = current->next; return *this; }
@@ -29,22 +32,26 @@ public:
         int& operator*() { return current->value; }
 
     private:
+
         Node* current;
     };
 
-    explicit SList(Node* head = nullptr, Node* tail = nullptr) : m_head(head), m_tail(tail){}
-    SList(const SList & other) = default;
+    constexpr explicit SList(Node* head = nullptr, Node* tail = nullptr) : m_head(head), m_tail(tail) { }
+    SList(const SList & other);
     ~SList();
+    SList& operator=(const SList& other) noexcept;
+    void swap(SList& other); 
     void push_back(const int &x);
     void push_front(const int &x);
     void pop_front();
-    bool isEmpty() { return m_head == nullptr; }
+    bool isEmpty() const noexcept { return m_head == nullptr; }
+    void PrintList() const;
     
     // Iterator methods.
     SListIterator begin() const { return SListIterator{m_head}; }
     SListIterator end() const { return SListIterator{nullptr}; }
 
-    void PrintList();
+
 private:
 
     Node* m_head;
